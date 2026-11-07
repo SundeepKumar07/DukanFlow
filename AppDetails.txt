@@ -1,0 +1,167 @@
+# DukanFlow (ShopManagerApp) 📱💼
+
+> **Smart, Reliable & Offline-First POS, Inventory & Financial Accounting System for Modern Retailers.**  
+> **Developer:** **Sundeep Kumar**
+
+---
+
+## 📌 Introduction
+
+**DukanFlow** (internally `ShopManagerApp`) is a production-grade, modern point-of-sale (POS), billing, inventory, and ledger management mobile application built with **React Native (Expo SDK 54)** and **TypeScript**. 
+
+Designed specifically for single and multi-branch retail shops, mobile & electronics outlets, wholesale distributors, and departmental stores, DukanFlow empowers business owners to take complete control of their retail operations—**without requiring continuous internet connectivity**. 
+
+It runs on an **offline-first local architecture** using **SQLite (via Drizzle ORM)** for blazing-fast local read/write execution, coupled with real-time multi-device cloud synchronization powered by **Supabase**.
+
+---
+
+## 📖 Description & Problem Solved
+
+Traditional retail and POS solutions are often clunky, heavily dependent on 24/7 internet connections, or fail to provide robust offline capabilities when local connectivity drops. 
+
+**DukanFlow** bridges this gap:
+- **Zero Downtime**: Operates 100% offline. Generate bills, register customers, update stock, and record payments anytime, anywhere.
+- **Accurate Financial Health**: Unified cash-in-hand, bank balances (JazzCash, EasyPaisa, Bank accounts), and customer khata (credit ledger) tracking in real time.
+- **Data Integrity**: Atomic local transactions, conflict-free multi-device synchronization (Last-Write-Wins), and automated local/cloud backup mechanisms.
+- **Device-Bound Security**: Cryptographically verified offline license activation, role-based access control (Owner vs. Salesman), and PIN-guarded actions.
+
+---
+
+## 🚀 Key Features
+
+### 🛒 1. Billing & Point of Sale (POS)
+- **Fast Search & Barcode Scanning**: Search products by name, category, or scan via built-in camera barcode/QR scanner.
+- **Flexible Unit Management**: Supports item quantities in multiple units (`pcs`, `kg`, `meter`, `box`, `litre`, `dozen`, etc.).
+- **Dynamic Pricing & Discounts**: Custom sale prices, discounts, and real-time margin/profit calculation during billing.
+- **Customer Association**: Walk-in sales or mapped to registered customer accounts with partial or full credit balances.
+- **Bill Search & Filtering**: Deep database search by Bill ID (`#123` or `123`), customer name, or payment methods.
+
+### 📦 2. Inventory & Stock Control
+- **Product Management**: Track purchase price, retail price, stock levels, custom units, categories, and barcodes.
+- **Automated Low-Stock Alerts**: Visual badges and stock indicators alerting when items need reordering.
+- **Automated Barcode/QR Generation**: Generates unique system barcodes and QR payloads automatically if absent.
+- **Bulk Stock Adjustments & Cost History**: Accurate profit reporting based on historical purchase prices recorded at bill time.
+
+### 👥 3. Khata & Customer Credit Ledger
+- **Customer Directory**: Deep database search across names, phone numbers, CNIC, and addresses.
+- **Customer Statement Reports**: Full editorial customer statements (PDF/Print) matching professional billing invoices.
+- **Flexible Ledger Repayments**: Record customer debit/credit transactions with detailed notes (e.g., *"Payment received from Ali"*).
+- **Automated Reversal**: Complete ledger reversal and recalculation upon bill cancellations or payment edits.
+
+### 💰 4. Multi-Account Cash Flow & Expenses
+- **Account Profiles**: Track multiple physical or digital accounts (Cash in Till, Bank Accounts, JazzCash, EasyPaisa).
+- **Transaction History**: Real-time record of all inflows, outflows, ledger settlements, and operational expenses.
+- **Expense Categorization**: Categorize daily shop expenditures (rent, utilities, tea, salaries, vendor supplies).
+- **Net Balance Calculation**: Automated ledger reconciliation ensuring cash flow always mirrors reality.
+
+### 🖨️ 5. Printing & Digital Sharing
+- **Thermal Receipt Printing**: Native 58mm / 80mm ESC/POS thermal printer integration via Bluetooth.
+- **Dynamic Shop Headers**: Automatically embeds shop title, owner name, salesman, contact numbers, and shop address.
+- **Full Invoice Printing & PDF Generation**: Generates clean, branded PDF invoices with print and native share sheet integration.
+
+### 🏪 6. Multi-Shop Switching
+- Effortlessly manage and switch between multiple retail branches or shop profiles within a single tap.
+- Dedicated data isolation per shop while keeping unified global owner reporting.
+
+### 🔐 7. Role-Based Access Control (RBAC) & Security
+- **Owner Mode**: Full, unrestricted access to analytics, staff setup, license management, and settings.
+- **Salesman Mode**: PIN-secured mode restricting access to sensitive financial metrics, profit margins, cost prices, or system settings.
+- **12 Granular Permissions**: Custom toggles per staff member (e.g., `create_bill`, `edit_product`, `view_profit`, `manage_expenses`).
+
+---
+
+## ☁️ Services & Architecture
+
+| Layer | Technology | Role & Functionality |
+| :--- | :--- | :--- |
+| **Mobile Core** | React Native, Expo SDK 54, React 19 | Cross-platform mobile runtime with high performance and smooth UI animations. |
+| **Local Database** | SQLite (`expo-sqlite`), Drizzle ORM | High-speed local database engine running full ACID transactions and queries offline. |
+| **Cloud Backend** | Supabase (PostgreSQL) | Real-time cloud sync, authenticated multi-device sync, and secure remote backup. |
+| **Security & Cryptography** | `expo-crypto`, `expo-secure-store` | Hardware-backed key store, SHA-256 HMAC offline license signature validation. |
+| **Document & Printing** | `expo-print`, `expo-sharing` | Thermal ESC/POS formatting, dynamic HTML-to-PDF rendering and document distribution. |
+| **File System Backup** | `expo-file-system`, SAF | Android Storage Access Framework & iOS native file export (`.shopbak` package format). |
+
+---
+
+## 📦 Packages & Licensing Tiers
+
+DukanFlow is built to serve small shopkeepers up to multi-branch enterprises through flexible tiers:
+
+```mermaid
+graph LR
+    FreeTrial["🆓 3-Month Free Trial<br/>(Full Access)"] --> Standard["💼 Standard Package<br/>(Offline Pro)"]
+    FreeTrial --> Premium["👑 Premium Package<br/>(Cloud & Multi-Device)"]
+    Standard --> Premium
+```
+
+### 🆓 1. Free Trial Package (90 Days / 3 Months)
+Every new installation automatically receives a **full-access 90-day free trial** without needing credit cards or upfront registration:
+- Complete POS, billing, and inventory features.
+- Full customer khata and ledger accounting.
+- Native thermal receipt and PDF invoice printing.
+- Local `.shopbak` file export and restore.
+- Single-device deployment with offline reliability.
+
+---
+
+### 💼 2. Standard Package (Single Device / Offline Pro)
+Ideal for single-counter standalone stores needing dependable, offline-first billing:
+- **Duration Options**: 3 Months, 1 Year, or Lifetime Access.
+- **All Core Features**: Unlimited bills, unlimited products, unlimited customers.
+- **Khata Management**: Full credit/debit tracking and PDF customer account statements.
+- **Local Backup & Restore**: One-click encrypted file backups (`.shopbak`) to device storage or external drives.
+- **Offline PIN Activation**: Activate without requiring an active internet connection on the device.
+
+---
+
+### 👑 3. Premium Package (Multi-Device & Cloud Sync)
+Engineered for shops with multiple sales counters, warehouse staff, and remote owners:
+- **All Standard Package Features Included**.
+- **Real-Time Cloud Synchronization**: Powered by Supabase for instantaneous synchronization across devices.
+- **Multi-Device Cashier Login**: Multiple salesmen and cashiers can bill simultaneously on separate phones/tablets.
+- **Live Cloud Backup**: Seamless cloud backup to protect against phone loss, damage, or theft.
+- **Google Drive Backup & Restore**: One-tap direct cloud backup to the owner's personal Google Drive.
+- **Remote Owner Monitoring**: Check real-time daily sales, live profits, and cash balances from outside the shop.
+
+---
+
+## 💎 Benefits for Business Owners
+
+1. **Complete Independence from Internet Glitches**: Power outages or weak mobile data will never halt your checkout line.
+2. **Eliminate Cash & Stock Leakages**: Track every rupee, bank transfer, and unit of stock with automated math and historical logs.
+3. **Save Time with Fast Billing**: Barcode scanning and smart product search reduce customer wait times by over 70%.
+4. **Professional Brand Image**: Deliver crisp thermal receipts or WhatsApp PDF invoices with your shop logo, contact, and custom policies.
+5. **Multi-Shop Scalability**: Open new branches and manage them under one app with dedicated permissions.
+
+---
+
+## 🔮 Future Goals & Roadmap
+
+- [ ] **AI-Powered Demand Forecasting**: Predictive stock replenishment alerts based on historical sales velocity and seasonal trends.
+- [ ] **Direct WhatsApp Business Integration**: Automated payment reminders and bill PDF delivery directly to customer WhatsApp numbers.
+- [ ] **Supplier & Vendor Management (Purchase Orders)**: Complete purchase ordering, vendor ledger accounts, and accounts payable tracking.
+- [ ] **E-Commerce Web Catalog (Dukan Online)**: 1-click generation of an online product catalog where local customers can place pickup orders.
+- [ ] **Barcode Label Printing**: Direct printing of custom product barcode and QR stickers onto 2-inch and 3-inch label printers.
+- [ ] **Multi-Currency Support**: Expanded international currency and regional tax (VAT/GST) configurations for global retail markets.
+
+---
+
+## 👨‍💻 Developer & Support Information
+
+- **Lead Developer & Architect**: **Sundeep Kumar**
+- **Support & License Activation**:
+  - 📞 **Phone / WhatsApp**: `+92 321 6770416`
+  - 💬 **WhatsApp Direct**: [Message on WhatsApp](https://wa.me/923216770416)
+  - 💳 **Payment Channels**: JazzCash & EasyPaisa (`0321-6770416`)
+
+---
+
+*© 2026 DukanFlow (ShopManagerApp). All Rights Reserved. Engineered with precision by Sundeep Kumar.*
+
+
+
+
+app location
+DukanFlow/releases/download/v1.0/DukanFlow_3.0.1.apk
+current root
+DukanFlow/website/*.html
