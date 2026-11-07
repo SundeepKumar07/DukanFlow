@@ -31,7 +31,7 @@ document.addEventListener('DOMContentLoaded', () => {
     if (questionBtn) {
       questionBtn.addEventListener('click', () => {
         const isActive = item.classList.contains('active');
-        
+
         // Close all items
         faqItems.forEach(i => i.classList.remove('active'));
 
