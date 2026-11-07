@@ -105,8 +105,8 @@ document.addEventListener('DOMContentLoaded', () => {
     }
   }
 
-  // Example GitHub sync hook (auto-connects if repository exists):
-  fetchGitHubReleaseDownloads('SundeepKumar07', 'DukanFlow');
+  // Example GitHub sync hook (auto-connects to your releases repo):
+  fetchGitHubReleaseDownloads('SundeepKumar07', 'DukanFlow-releases');
 
   apkDownloadBtns.forEach(btn => {
     btn.addEventListener('click', () => {
