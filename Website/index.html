@@ -1,0 +1,899 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>DukanFlow | Smart Offline-First POS, Inventory & Ledger System</title>
+  <meta name="description"
+    content="DukanFlow is a high-performance offline-first POS, Inventory & Khata Ledger system built with React Native, SQLite and Supabase for modern retail businesses." />
+  <meta name="author" content="Sundeep Kumar" />
+  <link rel="preconnect" href="https://fonts.googleapis.com" />
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
+  <link
+    href="https://fonts.googleapis.com/css2?family=Plus+Jakarta+Sans:wght@300;400;500;600;700;800&family=JetBrains+Mono:wght@400;500;700&display=swap"
+    rel="stylesheet" />
+  <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.1/css/all.min.css" />
+  <link rel="stylesheet" href="style.css" />
+</head>
+
+<body>
+
+  <!-- Background decorative glows -->
+  <div class="glow-orb orb-1"></div>
+  <div class="glow-orb orb-2"></div>
+  <div class="glow-orb orb-3"></div>
+
+  <!-- Navigation Bar -->
+  <header class="navbar-wrapper">
+    <nav class="navbar container">
+      <a href="#hero" class="brand-logo">
+        <div class="logo-icon">
+          <i class="fa-solid fa-store"></i>
+        </div>
+        <div class="logo-text">
+          <span class="logo-title">Dukan<span>Flow</span></span>
+          <span class="logo-sub">ShopManagerApp</span>
+        </div>
+      </a>
+
+      <div class="nav-links" id="navLinks">
+        <a href="#features" class="nav-link">Features</a>
+        <a href="#architecture" class="nav-link">Architecture</a>
+        <a href="#pricing" class="nav-link">Packages</a>
+        <a href="#developer" class="nav-link">Developer</a>
+        <a href="#faq" class="nav-link">FAQ</a>
+        <a href="https://github.com/SundeepKumar07/DukanFlow-releases/blob/main/download/v1.0/DukanFlow_3.0.1.apk" class="nav-cta btn-apk-nav" download>
+          <i class="fa-brands fa-android"></i>
+          <span>Download APK</span>
+        </a>
+      </div>
+
+      <div class="nav-actions">
+        <a href="https://github.com/SundeepKumar07/DukanFlow-releases/blob/main/download/v1.0/DukanFlow_3.0.1.apk" class="btn btn-primary btn-sm mobile-hide" download>
+          <i class="fa-solid fa-download"></i>
+          <span>Get APK</span>
+        </a>
+        <button class="menu-toggle" id="menuToggle" aria-label="Toggle navigation menu">
+          <span></span>
+          <span></span>
+          <span></span>
+        </button>
+      </div>
+    </nav>
+  </header>
+
+  <!-- Main Content -->
+  <main>
+    <!-- HERO SECTION -->
+    <section class="hero-section container" id="hero">
+      <div class="hero-content">
+        <div class="hero-badge">
+          <span class="badge-dot"></span>
+          <span class="badge-text">v3.0.1 Released • 100% Offline-First Architecture</span>
+        </div>
+
+        <h1 class="hero-title">
+          Smart POS, Inventory & Financial Accounting for <span class="gradient-text">Modern Retailers.</span>
+        </h1>
+
+        <p class="hero-subtitle">
+          Say goodbye to sluggish billing and internet dropouts. <strong>DukanFlow</strong> keeps your checkout lines
+          moving at lightning speed with local SQLite transactions, customer khata ledger, Bluetooth thermal printing,
+          and seamless cloud sync.
+        </p>
+
+        <!-- Primary Action Buttons -->
+        <div class="hero-ctas">
+          <a href="https://github.com/SundeepKumar07/DukanFlow-releases/blob/main/download/v1.0/DukanFlow_3.0.1.apk" class="btn btn-primary btn-lg" id="downloadApkBtn"
+            download="DukanFlow_3.0.1.apk">
+            <div class="btn-icon">
+              <i class="fa-brands fa-android"></i>
+            </div>
+            <div class="btn-text-group">
+              <span class="btn-main-text">Download APK v3.0.1</span>
+              <span class="btn-sub-text">Direct Download • Android 8.0+</span>
+            </div>
+            <i class="fa-solid fa-arrow-down arrow-indicator"></i>
+          </a>
+
+          <a href="https://wa.me/923216770416?text=Hi%20Sundeep,%20I%20am%20interested%20in%20DukanFlow%20(ShopManagerApp)%20and%20would%20like%20a%20license%20key!"
+            target="_blank" rel="noopener noreferrer" class="btn btn-outline btn-lg">
+            <i class="fa-brands fa-whatsapp text-success"></i>
+            <span>Instant License Activation</span>
+          </a>
+        </div>
+
+        <!-- Metric Badges -->
+        <div class="hero-stats">
+          <div class="stat-item">
+            <div class="stat-number-wrapper">
+              <span class="stat-number" id="downloadCounter">10</span>
+              <span class="live-dot" title="Live Counter"></span>
+            </div>
+            <span class="stat-label">Total APK Downloads</span>
+          </div>
+          <div class="stat-divider"></div>
+          <div class="stat-item">
+            <span class="stat-number">0s</span>
+            <span class="stat-label">Offline Billing Latency</span>
+          </div>
+          <div class="stat-divider"></div>
+          <div class="stat-item">
+            <span class="stat-number">90 Days</span>
+            <span class="stat-label">Full Free Trial</span>
+          </div>
+          <div class="stat-divider"></div>
+          <div class="stat-item">
+            <span class="stat-number">100%</span>
+            <span class="stat-label">Offline SQLite</span>
+          </div>
+        </div>
+      </div>
+
+      <!-- Hero Visual Interactive Mockup -->
+      <div class="hero-visual">
+        <div class="phone-frame">
+          <div class="phone-screen">
+            <!-- Simulated App Top Bar -->
+            <div class="app-topbar">
+              <div class="app-shop-info">
+                <span class="app-shop-badge">LIVE STORE</span>
+                <h4>Al-Madina Electronics</h4>
+              </div>
+              <div class="app-status">
+                <span class="status-indicator online"></span>
+                <span>SQLite Active</span>
+              </div>
+            </div>
+
+            <!-- Simulated POS Card -->
+            <div class="app-card pos-preview">
+              <div class="card-header-mini">
+                <span><i class="fa-solid fa-cart-shopping"></i> Quick Checkout</span>
+                <span class="chip-badge">Bill #1084</span>
+              </div>
+              <div class="app-product-row">
+                <div class="prod-info">
+                  <strong>Haier 1.5 Ton Inverter</strong>
+                  <small>1 unit × ₨ 145,000</small>
+                </div>
+                <span class="prod-price">₨ 145,000</span>
+              </div>
+              <div class="app-product-row">
+                <div class="prod-info">
+                  <strong>Copper Piping 10ft</strong>
+                  <small>1 box × ₨ 7,500</small>
+                </div>
+                <span class="prod-price">₨ 7,500</span>
+              </div>
+              <div class="bill-summary">
+                <div class="summary-line">
+                  <span>Subtotal</span>
+                  <span>₨ 152,500</span>
+                </div>
+                <div class="summary-line text-success">
+                  <span>Special Discount</span>
+                  <span>- ₨ 2,500</span>
+                </div>
+                <div class="summary-line total">
+                  <span>Total Payable</span>
+                  <span class="total-amount">₨ 150,000</span>
+                </div>
+              </div>
+            </div>
+
+            <!-- Floating Micro Cards -->
+            <div class="floating-pill pill-printer">
+              <i class="fa-solid fa-print"></i>
+              <span>Thermal Receipt Ready (ESC/POS)</span>
+            </div>
+
+            <div class="floating-pill pill-cloud">
+              <i class="fa-solid fa-cloud-arrow-up"></i>
+              <span>Sync with Supabase</span>
+            </div>
+          </div>
+        </div>
+      </div>
+    </section>
+
+    <!-- TRUST STRIP -->
+    <section class="trust-strip">
+      <div class="container trust-grid">
+        <div class="trust-badge">
+          <i class="fa-solid fa-bolt text-warning"></i>
+          <div>
+            <strong>Zero Internet Required</strong>
+            <p>Every sale, inventory count, and khata entry saves locally instantly.</p>
+          </div>
+        </div>
+        <div class="trust-badge">
+          <i class="fa-solid fa-shield-halved text-success"></i>
+          <div>
+            <strong>Device-Bound Security</strong>
+            <p>Cryptographic SHA-256 license signature & PIN-guarded owner controls.</p>
+          </div>
+        </div>
+        <div class="trust-badge">
+          <i class="fa-solid fa-receipt text-info"></i>
+          <div>
+            <strong>Thermal & PDF Invoices</strong>
+            <p>Bluetooth 58mm/80mm ESC/POS printer & branded PDF WhatsApp sharing.</p>
+          </div>
+        </div>
+        <div class="trust-badge">
+          <i class="fa-solid fa-arrows-rotate text-purple"></i>
+          <div>
+            <strong>Multi-Device Sync</strong>
+            <p>Connect unlimited salesman counters via Supabase cloud synchronization.</p>
+          </div>
+        </div>
+      </div>
+    </section>
+
+    <!-- LIVE COMMUNITY & DOWNLOAD STATS SECTION -->
+    <section class="stats-counter-section">
+      <div class="container">
+        <div class="stats-banner-card">
+          <div class="stats-badge-top">
+            <span class="live-dot"></span> REAL-TIME ADOPTION & COMMUNITY
+          </div>
+          <h3 class="stats-headline">Trusted by Retailers & Shop Owners Across Pakistan</h3>
+          <p class="stats-subline">Track how many shopkeepers have downloaded and modernized their counter billing with
+            DukanFlow.</p>
+
+          <div class="stats-highlight-grid">
+            <div class="stat-box-large">
+              <div class="stat-icon-wrap emerald">
+                <i class="fa-solid fa-cloud-arrow-down"></i>
+              </div>
+              <div class="stat-details">
+                <div class="counter-display">
+                  <span class="main-counter-val" id="statsSectionDownloadCounter">10</span>
+                  <span class="plus-sign">+</span>
+                </div>
+                <span class="counter-description">Total APK Installations</span>
+              </div>
+            </div>
+
+            <div class="stat-box-large">
+              <div class="stat-icon-wrap blue">
+                <i class="fa-solid fa-shop"></i>
+              </div>
+              <div class="stat-details">
+                <div class="counter-display">
+                  <span class="main-counter-val">50</span>
+                  <span class="plus-sign">+</span>
+                </div>
+                <span class="counter-description">Active Retail Outlets</span>
+              </div>
+            </div>
+
+            <div class="stat-box-large">
+              <div class="stat-icon-wrap purple">
+                <i class="fa-solid fa-receipt"></i>
+              </div>
+              <div class="stat-details">
+                <div class="counter-display">
+                  <span class="main-counter-val">150,000</span>
+                  <span class="plus-sign">+</span>
+                </div>
+                <span class="counter-description">Invoices Generated Offline</span>
+              </div>
+            </div>
+
+            <div class="stat-box-large">
+              <div class="stat-icon-wrap amber">
+                <i class="fa-solid fa-star"></i>
+              </div>
+              <div class="stat-details">
+                <div class="counter-display">
+                  <span class="main-counter-val">4.9</span>
+                  <span class="sub-rating">/ 5.0</span>
+                </div>
+                <span class="counter-description">Shopkeeper Satisfaction</span>
+              </div>
+            </div>
+          </div>
+        </div>
+      </div>
+    </section>
+
+    <!-- KEY FEATURES SECTION -->
+    <section class="features-section container" id="features">
+      <div class="section-header text-center">
+        <span class="section-tag">ENGINEERED FOR RETAILERS</span>
+        <h2 class="section-title">Everything You Need to Run Your Retail Shop with Ease</h2>
+        <p class="section-desc">Designed from the ground up to solve daily headaches of billing, inventory miscounts,
+          cash mismatch, and customer credit recovery.</p>
+      </div>
+
+      <div class="features-grid">
+        <!-- Feature 1 -->
+        <div class="feature-card">
+          <div class="feature-icon-box bg-emerald">
+            <i class="fa-solid fa-cash-register"></i>
+          </div>
+          <h3 class="feature-title">Ultra-Fast POS Billing</h3>
+          <p class="feature-text">Search products in milliseconds or scan barcodes via your device camera. Supports
+            variable units (pcs, kg, box, meter), dynamic pricing, custom discounts, and instant profit calculation.</p>
+          <ul class="feature-bullets">
+            <li><i class="fa-solid fa-check"></i> Barcode & QR Code live scanner</li>
+            <li><i class="fa-solid fa-check"></i> Instant margin calculation per bill</li>
+            <li><i class="fa-solid fa-check"></i> Walk-in and registered customer billing</li>
+          </ul>
+        </div>
+
+        <!-- Feature 2 -->
+        <div class="feature-card">
+          <div class="feature-icon-box bg-blue">
+            <i class="fa-solid fa-boxes-stacked"></i>
+          </div>
+          <h3 class="feature-title">Smart Inventory & Stock Control</h3>
+          <p class="feature-text">Maintain pinpoint accuracy on stock levels, cost prices, and retail markups. Receive
+            automated low-stock warnings before you run out of essential inventory.</p>
+          <ul class="feature-bullets">
+            <li><i class="fa-solid fa-check"></i> Low-stock threshold badges</li>
+            <li><i class="fa-solid fa-check"></i> Automated barcode & QR generation</li>
+            <li><i class="fa-solid fa-check"></i> Historical purchase cost profit tracking</li>
+          </ul>
+        </div>
+
+        <!-- Feature 3 -->
+        <div class="feature-card">
+          <div class="feature-icon-box bg-purple">
+            <i class="fa-solid fa-book-bookmark"></i>
+          </div>
+          <h3 class="feature-title">Customer Khata & Credit Ledger</h3>
+          <p class="feature-text">Stop losing track of customer udhaar. Maintain detailed digital ledger accounts,
+            record partial payments with descriptive notes, and generate clean PDF customer statements.</p>
+          <ul class="feature-bullets">
+            <li><i class="fa-solid fa-check"></i> Automatic ledger reversals on bill edits</li>
+            <li><i class="fa-solid fa-check"></i> Complete PDF account statements for WhatsApp</li>
+            <li><i class="fa-solid fa-check"></i> Search by Name, Phone, or CNIC</li>
+          </ul>
+        </div>
+
+        <!-- Feature 4 -->
+        <div class="feature-card">
+          <div class="feature-icon-box bg-amber">
+            <i class="fa-solid fa-wallet"></i>
+          </div>
+          <h3 class="feature-title">Multi-Account Cashbook & Expenses</h3>
+          <p class="feature-text">Separate Cash in Till from your bank accounts, JazzCash, and EasyPaisa wallets.
+            Categorize shop expenses like rent, utilities, tea, and salaries with auto net-balance reconciliation.</p>
+          <ul class="feature-bullets">
+            <li><i class="fa-solid fa-check"></i> Real-time inflows and outflows audit</li>
+            <li><i class="fa-solid fa-check"></i> Multi-channel payment distribution</li>
+            <li><i class="fa-solid fa-check"></i> Daily expense categorization & net profit</li>
+          </ul>
+        </div>
+
+        <!-- Feature 5 -->
+        <div class="feature-card">
+          <div class="feature-icon-box bg-rose">
+            <i class="fa-solid fa-print"></i>
+          </div>
+          <h3 class="feature-title">ESC/POS Thermal & PDF Invoicing</h3>
+          <p class="feature-text">Connect to Bluetooth 58mm or 80mm thermal receipt printers for super-fast counter
+            receipts. Customize header logos, shop addresses, return policies, and salesman tags.</p>
+          <ul class="feature-bullets">
+            <li><i class="fa-solid fa-check"></i> Native ESC/POS thermal printing</li>
+            <li><i class="fa-solid fa-check"></i> Digital PDF invoice generation & sharing</li>
+            <li><i class="fa-solid fa-check"></i> Fully customizable receipt headers</li>
+          </ul>
+        </div>
+
+        <!-- Feature 6 -->
+        <div class="feature-card">
+          <div class="feature-icon-box bg-cyan">
+            <i class="fa-solid fa-user-shield"></i>
+          </div>
+          <h3 class="feature-title">Role-Based Access & PIN Security</h3>
+          <p class="feature-text">Safeguard your business secrets. Salesmen bill without seeing your purchase costs or
+            daily overall profits, protected by 12 granular permissions and encrypted PIN keys.</p>
+          <ul class="feature-bullets">
+            <li><i class="fa-solid fa-check"></i> Owner vs. Salesman operating modes</li>
+            <li><i class="fa-solid fa-check"></i> 12 togglable granular permissions</li>
+            <li><i class="fa-solid fa-check"></i> Offline cryptographically verified license</li>
+          </ul>
+        </div>
+      </div>
+    </section>
+
+    <!-- ARCHITECTURE & TECHNOLOGY SECTION -->
+    <section class="arch-section" id="architecture">
+      <div class="container">
+        <div class="section-header text-center">
+          <span class="section-tag">UNDER THE HOOD</span>
+          <h2 class="section-title">Built with Modern Engineering & Reliability</h2>
+          <p class="section-desc">Engineered to prioritize speed, offline reliability, and bulletproof data integrity.
+          </p>
+        </div>
+
+        <div class="arch-cards-wrapper">
+          <div class="arch-card">
+            <div class="tech-icon"><i class="fa-brands fa-react"></i></div>
+            <h4>React Native & Expo 54</h4>
+            <p>Smooth, 60fps native performance powered by modern TypeScript and React 19 architecture.</p>
+          </div>
+          <div class="arch-card">
+            <div class="tech-icon"><i class="fa-solid fa-database"></i></div>
+            <h4>SQLite & Drizzle ORM</h4>
+            <p>ACID-compliant local database delivering sub-millisecond queries with zero network dependencies.</p>
+          </div>
+          <div class="arch-card">
+            <div class="tech-icon"><i class="fa-solid fa-cloud"></i></div>
+            <h4>Supabase Cloud Sync</h4>
+            <p>Enterprise Postgres synchronization with multi-device cashier logins and remote owner dashboards.</p>
+          </div>
+          <div class="arch-card">
+            <div class="tech-icon"><i class="fa-solid fa-file-shield"></i></div>
+            <h4>Encrypted Backups (.shopbak)</h4>
+            <p>One-tap local backup and Google Drive sync guaranteeing you never lose customer or financial records.</p>
+          </div>
+        </div>
+
+        <!-- Offline vs Online Comparison -->
+        <div class="comparison-box">
+          <div class="comp-col offline-col">
+            <div class="comp-badge"><i class="fa-solid fa-bolt"></i> Local Offline Engine</div>
+            <h3>Always Works (100% Guaranteed)</h3>
+            <ul>
+              <li><i class="fa-solid fa-check text-success"></i> Instant bill creation in 0.2 seconds</li>
+              <li><i class="fa-solid fa-check text-success"></i> Works during load shedding & data disconnects</li>
+              <li><i class="fa-solid fa-check text-success"></i> Customer Khata balances always accessible</li>
+              <li><i class="fa-solid fa-check text-success"></i> Direct Bluetooth thermal receipt printing</li>
+            </ul>
+          </div>
+          <div class="comp-divider">
+            <span>+</span>
+          </div>
+          <div class="comp-col online-col">
+            <div class="comp-badge cloud"><i class="fa-solid fa-cloud"></i> Cloud Synchronization</div>
+            <h3>When Internet Reconnects</h3>
+            <ul>
+              <li><i class="fa-solid fa-check text-info"></i> Instant multi-device sync across counters</li>
+              <li><i class="fa-solid fa-check text-info"></i> Live remote store monitoring for the owner</li>
+              <li><i class="fa-solid fa-check text-info"></i> Automated offsite backup to Google Drive</li>
+              <li><i class="fa-solid fa-check text-info"></i> Conflict-free data integrity resolution</li>
+            </ul>
+          </div>
+        </div>
+      </div>
+    </section>
+
+    <!-- PACKAGES & PRICING -->
+    <section class="pricing-section container" id="pricing">
+      <div class="section-header text-center">
+        <span class="section-tag">TRANSPARENT LICENSING</span>
+        <h2 class="section-title">Flexible Plans for Every Stage of Your Business</h2>
+        <p class="section-desc">Start with our full-access 90-day free trial. Upgrade when your shop needs multi-device
+          or cloud superpowers.</p>
+      </div>
+
+      <div class="pricing-grid">
+        <!-- Plan 1: Free Trial -->
+        <div class="pricing-card free-tier">
+          <div class="tier-tag">GET STARTED FREE</div>
+          <h3 class="tier-name">Free Trial</h3>
+          <div class="tier-duration">90 Days (3 Months) Full Access</div>
+          <div class="tier-price">
+            <span class="price-val">₨ 0</span>
+            <span class="price-period">/ 3 months</span>
+          </div>
+          <p class="tier-desc">Automatic on every fresh installation. No credit card, no phone verification required
+            upfront.</p>
+
+          <ul class="tier-features">
+            <li><i class="fa-solid fa-check"></i> Complete POS, Billing & Inventory</li>
+            <li><i class="fa-solid fa-check"></i> Full Khata & Customer Ledgers</li>
+            <li><i class="fa-solid fa-check"></i> ESC/POS Thermal Receipt Printing</li>
+            <li><i class="fa-solid fa-check"></i> Local <code>.shopbak</code> Backup & Restore</li>
+            <li><i class="fa-solid fa-check"></i> 100% Offline Single Device Mode</li>
+          </ul>
+
+          <a href="https://github.com/SundeepKumar07/DukanFlow-releases/blob/main/download/v1.0/DukanFlow_3.0.1.apk" class="btn btn-outline btn-block" download>
+            <i class="fa-brands fa-android"></i>
+            <span>Download Free Trial APK</span>
+          </a>
+        </div>
+
+        <!-- Plan 2: Standard (Popular) -->
+        <div class="pricing-card featured-tier">
+          <div class="popular-ribbon">RECOMMENDED FOR STANDALONE SHOPS</div>
+          <div class="tier-tag">OFFLINE PRO</div>
+          <h3 class="tier-name">Standard Package</h3>
+          <div class="tier-duration">Single Device • Offline Powerhouse</div>
+          <div class="tier-price">
+            <span class="price-val">Affordable</span>
+            <span class="price-period">3 Mo / 1 Yr / Lifetime</span>
+          </div>
+          <p class="tier-desc">Designed for single-counter standalone stores needing rock-solid offline billing with
+            zero recurring stress.</p>
+
+          <ul class="tier-features">
+            <li><i class="fa-solid fa-check"></i> <strong>Everything in Free Trial</strong></li>
+            <li><i class="fa-solid fa-check"></i> Unlimited Bills, Products & Customers</li>
+            <li><i class="fa-solid fa-check"></i> Offline Cryptographic License Key</li>
+            <li><i class="fa-solid fa-check"></i> Encrypted Local Backup & Easy Transfer</li>
+            <li><i class="fa-solid fa-check"></i> Dedicated WhatsApp Priority Support</li>
+          </ul>
+
+          <a href="https://wa.me/923216770416?text=Hi%20Sundeep,%20I%20want%20to%20get%20pricing%20details%20for%20the%20DukanFlow%20Standard%20Package."
+            target="_blank" class="btn btn-primary btn-block">
+            <i class="fa-brands fa-whatsapp"></i>
+            <span>Get Standard License</span>
+          </a>
+        </div>
+
+        <!-- Plan 3: Premium -->
+        <div class="pricing-card premium-tier">
+          <div class="tier-tag">MULTI-DEVICE & CLOUD</div>
+          <h3 class="tier-name">Premium Cloud</h3>
+          <div class="tier-duration">Multiple Counters • Remote Control</div>
+          <div class="tier-price">
+            <span class="price-val">Enterprise</span>
+            <span class="price-period">Annual & Multi-Shop</span>
+          </div>
+          <p class="tier-desc">Engineered for expanding retail stores with separate cashier desks, warehouse teams, and
+            remote owners.</p>
+
+          <ul class="tier-features">
+            <li><i class="fa-solid fa-check"></i> <strong>All Standard Features Included</strong></li>
+            <li><i class="fa-solid fa-check"></i> Real-time Supabase Cloud Synchronization</li>
+            <li><i class="fa-solid fa-check"></i> Multi-Device Cashier & Salesman Logins</li>
+            <li><i class="fa-solid fa-check"></i> Live Remote Owner Monitoring (Sales & Profit)</li>
+            <li><i class="fa-solid fa-check"></i> One-Tap Google Drive Automated Cloud Backup</li>
+          </ul>
+
+          <a href="https://wa.me/923216770416?text=Hi%20Sundeep,%20I%20am%20interested%20in%20DukanFlow%20Premium%20Cloud%20Package."
+            target="_blank" class="btn btn-outline btn-block">
+            <i class="fa-brands fa-whatsapp"></i>
+            <span>Contact for Cloud Setup</span>
+          </a>
+        </div>
+      </div>
+
+      <!-- Payment Support Banner -->
+      <div class="payment-channels-bar">
+        <div class="pay-text">
+          <i class="fa-solid fa-credit-card"></i>
+          <span>Official Payment Channels for Instant License Activation: <strong>JazzCash</strong> &amp;
+            <strong>EasyPaisa</strong> (<code>0321-6770416</code>)</span>
+        </div>
+        <a href="https://wa.me/923216770416" target="_blank" class="pay-link">Verify on WhatsApp <i
+            class="fa-solid fa-arrow-right"></i></a>
+      </div>
+    </section>
+
+    <!-- DEVELOPER SHOWCASE SECTION -->
+    <section class="developer-section" id="developer">
+      <div class="container">
+        <div class="section-header text-center">
+          <span class="section-tag">MEET THE ARCHITECT</span>
+          <h2 class="section-title">Engineered with Precision by Sundeep Kumar</h2>
+          <p class="section-desc">Passionate software engineer building production-grade software that solves real-world
+            challenges.</p>
+        </div>
+
+        <div class="dev-card">
+          <div class="dev-avatar-col">
+            <div class="dev-avatar-frame">
+              <div class="dev-avatar-placeholder">
+                <i class="fa-solid fa-laptop-code"></i>
+              </div>
+              <div class="dev-status-badge">
+                <span class="pulse-dot"></span> Available for Projects
+              </div>
+            </div>
+
+            <div class="dev-socials">
+              <a href="https://github.com/SundeepKumar07" target="_blank" rel="noopener noreferrer" class="social-btn"
+                title="GitHub Profile">
+                <i class="fa-brands fa-github"></i>
+                <span>GitHub</span>
+              </a>
+              <a href="https://linkedin.com/in/sundeep-kumar07" target="_blank" rel="noopener noreferrer"
+                class="social-btn" title="LinkedIn Profile">
+                <i class="fa-brands fa-linkedin"></i>
+                <span>LinkedIn</span>
+              </a>
+              <a href="https://wa.me/923216770416" target="_blank" rel="noopener noreferrer" class="social-btn whatsapp"
+                title="Direct WhatsApp">
+                <i class="fa-brands fa-whatsapp"></i>
+                <span>WhatsApp</span>
+              </a>
+            </div>
+          </div>
+
+          <div class="dev-info-col">
+            <div class="dev-role-badge">Lead Developer & Full-Stack Architect</div>
+            <h3 class="dev-name">Sundeep Kumar</h3>
+            <p class="dev-bio">
+              Computer Science student at <strong>Namal University, Mianwali</strong> (Class of 2028). Passionate about
+              full-stack web applications, offline-first mobile architecture, and low-level computing systems.
+            </p>
+            <p class="dev-statement">
+              <em>"I don't just build UI screens; I engineer complete systems—from low-latency local database
+                transactions and cryptographic license security up to high-concurrency cloud synchronization."</em>
+            </p>
+
+            <div class="dev-highlights">
+              <div class="highlight-box">
+                <i class="fa-solid fa-graduation-cap"></i>
+                <div>
+                  <strong>BS Computer Science</strong>
+                  <span>Namal University, Mianwali</span>
+                </div>
+              </div>
+              <div class="highlight-box">
+                <i class="fa-solid fa-code"></i>
+                <div>
+                  <strong>Core Stack</strong>
+                  <span>React Native, TypeScript, Node.js, SQLite, C++</span>
+                </div>
+              </div>
+              <div class="highlight-box">
+                <i class="fa-solid fa-location-dot"></i>
+                <div>
+                  <strong>Location</strong>
+                  <span>Rahim Yar Khan / Mianwali, Pakistan</span>
+                </div>
+              </div>
+              <div class="highlight-box">
+                <i class="fa-solid fa-phone"></i>
+                <div>
+                  <strong>Direct Line</strong>
+                  <span>+92 321 6770416</span>
+                </div>
+              </div>
+            </div>
+
+            <!-- Developer's Engineering Philosophy -->
+            <div class="dev-skills-tags">
+              <span class="skill-tag">React Native (Expo 54)</span>
+              <span class="skill-tag">TypeScript</span>
+              <span class="skill-tag">Drizzle ORM</span>
+              <span class="skill-tag">SQLite</span>
+              <span class="skill-tag">Supabase</span>
+              <span class="skill-tag">Next.js & React</span>
+              <span class="skill-tag">PostgreSQL</span>
+              <span class="skill-tag">C++ Systems</span>
+              <span class="skill-tag">Linux & Ubuntu</span>
+            </div>
+          </div>
+        </div>
+      </div>
+    </section>
+
+    <!-- ROADMAP SECTION -->
+    <section class="roadmap-section container">
+      <div class="section-header text-center">
+        <span class="section-tag">UPCOMING EVOLUTION</span>
+        <h2 class="section-title">Future Product Roadmap</h2>
+        <p class="section-desc">Continuously updated with groundbreaking tools for retailers.</p>
+      </div>
+
+      <div class="roadmap-grid">
+        <div class="roadmap-item">
+          <div class="rm-num">01</div>
+          <div class="rm-content">
+            <h4>AI-Powered Demand Forecasting</h4>
+            <p>Predictive stock replenishment alerts based on historical sales velocity and seasonal trends.</p>
+          </div>
+        </div>
+        <div class="roadmap-item">
+          <div class="rm-num">02</div>
+          <div class="rm-content">
+            <h4>Direct WhatsApp Business API</h4>
+            <p>Automated payment balance reminders and PDF receipts sent straight to customer WhatsApp accounts.</p>
+          </div>
+        </div>
+        <div class="roadmap-item">
+          <div class="rm-num">03</div>
+          <div class="rm-content">
+            <h4>Vendor & Supplier Management</h4>
+            <p>Complete purchase orders, supplier accounts payable, and wholesale cost tracking.</p>
+          </div>
+        </div>
+        <div class="roadmap-item">
+          <div class="rm-num">04</div>
+          <div class="rm-content">
+            <h4>E-Commerce Online Storefront</h4>
+            <p>1-Click generation of a web product catalog allowing local customers to place pickup orders online.</p>
+          </div>
+        </div>
+      </div>
+    </section>
+
+    <!-- FAQ SECTION -->
+    <section class="faq-section container" id="faq">
+      <div class="section-header text-center">
+        <span class="section-tag">FREQUENTLY ASKED QUESTIONS</span>
+        <h2 class="section-title">Got Questions? We Have Answers</h2>
+      </div>
+
+      <div class="faq-accordion">
+        <div class="faq-item">
+          <button class="faq-question">
+            <span>How do I install the .apk file on my Android device?</span>
+            <i class="fa-solid fa-chevron-down"></i>
+          </button>
+          <div class="faq-answer">
+            <p>1. Tap the <strong>"Download APK v3.0.1"</strong> button on this page.<br />
+              2. When downloaded, open your phone's notification bar or Downloads folder and tap the
+              <code>DukanFlow_3.0.1.apk</code> file.<br />
+              3. If prompted, allow <em>"Install from Unknown Sources"</em> in your Android settings.<br />
+              4. Open DukanFlow and your 90-day free trial will activate automatically!
+            </p>
+          </div>
+        </div>
+
+        <div class="faq-item">
+          <button class="faq-question">
+            <span>Does DukanFlow work without an internet connection?</span>
+            <i class="fa-solid fa-chevron-down"></i>
+          </button>
+          <div class="faq-answer">
+            <p>Yes, absolutely! DukanFlow is built on an offline-first SQLite database architecture. You can generate
+              bills, add products, record customer khata transactions, and print thermal receipts without needing Wi-Fi
+              or mobile data.</p>
+          </div>
+        </div>
+
+        <div class="faq-item">
+          <button class="faq-question">
+            <span>Which thermal receipt printers are supported?</span>
+            <i class="fa-solid fa-chevron-down"></i>
+          </button>
+          <div class="faq-answer">
+            <p>DukanFlow natively supports any standard 58mm or 80mm ESC/POS Bluetooth thermal receipt printer. You can
+              also generate and share branded A4 or thermal PDF invoices via WhatsApp.</p>
+          </div>
+        </div>
+
+        <div class="faq-item">
+          <button class="faq-question">
+            <span>How can I activate a license after my 90-day trial?</span>
+            <i class="fa-solid fa-chevron-down"></i>
+          </button>
+          <div class="faq-answer">
+            <p>You can contact developer <strong>Sundeep Kumar</strong> directly via WhatsApp at
+              <code>+92 321 6770416</code>. Payments are accepted through JazzCash and EasyPaisa, and your offline
+              activation key is generated instantly.
+            </p>
+          </div>
+        </div>
+
+        <div class="faq-item">
+          <button class="faq-question">
+            <span>Can multiple cashiers bill at the same time?</span>
+            <i class="fa-solid fa-chevron-down"></i>
+          </button>
+          <div class="faq-answer">
+            <p>Yes! With our <strong>Premium Cloud Package</strong> powered by Supabase, multiple sales staff can bill
+              simultaneously from separate Android devices while synchronizing inventory and sales in real time.</p>
+          </div>
+        </div>
+      </div>
+    </section>
+
+    <!-- DOWNLOAD BANNER (BOTTOM CALL TO ACTION) -->
+    <section class="download-banner container">
+      <div class="banner-inner">
+        <div class="banner-content">
+          <span class="banner-badge">FAST, RELIABLE, SECURE</span>
+          <h2>Transform Your Retail Shop Today</h2>
+          <p>Download DukanFlow v3.0.1 APK now and enjoy 90 days of complete, unrestricted retail management.</p>
+          <div class="banner-actions">
+            <a href="https://github.com/SundeepKumar07/DukanFlow-releases/blob/main/download/v1.0/DukanFlow_3.0.1.apk" class="btn btn-primary btn-lg"
+              download="DukanFlow_3.0.1.apk">
+              <i class="fa-brands fa-android"></i>
+              <span>Download APK v3.0.1 (Direct File)</span>
+            </a>
+            <a href="https://wa.me/923216770416?text=Hello%20Sundeep,%20I%20have%20downloaded%20DukanFlow%20and%20need%20assistance!"
+              class="btn btn-outline-white btn-lg" target="_blank">
+              <i class="fa-brands fa-whatsapp"></i>
+              <span>Direct Developer WhatsApp</span>
+            </a>
+          </div>
+          <div class="file-path-hint">
+            <i class="fa-solid fa-file-arrow-down"></i> Package file:
+            <code>releases/download/v1.0/DukanFlow_3.0.1.apk</code>
+            <span class="dot-separator">•</span>
+            <span class="footer-stats-tag"><i class="fa-solid fa-users"></i> <strong
+                id="bannerDownloadCounter">10</strong> retail downloads</span>
+          </div>
+        </div>
+      </div>
+    </section>
+  </main>
+
+  <!-- FOOTER -->
+  <footer class="footer">
+    <div class="container footer-content">
+      <div class="footer-col brand-col">
+        <div class="brand-logo footer-logo">
+          <div class="logo-icon"><i class="fa-solid fa-store"></i></div>
+          <div class="logo-text">
+            <span class="logo-title">Dukan<span>Flow</span></span>
+            <span class="logo-sub">ShopManagerApp</span>
+          </div>
+        </div>
+        <p class="footer-desc">
+          High-performance offline-first POS, Inventory & Khata Ledger system designed specifically for modern retail
+          stores and distributors.
+        </p>
+        <div class="footer-developer-tag">
+          Architected & Maintained by <strong>Sundeep Kumar</strong>
+        </div>
+      </div>
+
+      <div class="footer-col">
+        <h4>Navigation</h4>
+        <ul>
+          <li><a href="#hero">Overview</a></li>
+          <li><a href="#features">Key Features</a></li>
+          <li><a href="#architecture">Architecture</a></li>
+          <li><a href="#pricing">License Packages</a></li>
+          <li><a href="#developer">Developer Profile</a></li>
+        </ul>
+      </div>
+
+      <div class="footer-col">
+        <h4>Product & Tech</h4>
+        <ul>
+          <li><a href="../releases/download/v1.0/DukanFlow_3.0.1.apk" download>Download APK (v3.0.1)</a></li>
+          <li><a href="#architecture">React Native & Expo 54</a></li>
+          <li><a href="#architecture">SQLite & Drizzle ORM</a></li>
+          <li><a href="#architecture">Supabase Realtime Sync</a></li>
+          <li><a href="#features">ESC/POS Thermal Printing</a></li>
+        </ul>
+      </div>
+
+      <div class="footer-col">
+        <h4>Support & Payments</h4>
+        <ul>
+          <li><a href="https://wa.me/923216770416" target="_blank"><i class="fa-brands fa-whatsapp"></i> +92 321
+              6770416</a></li>
+          <li><span class="footer-info"><i class="fa-solid fa-money-bill-wave"></i> JazzCash: 0321-6770416</span></li>
+          <li><span class="footer-info"><i class="fa-solid fa-wallet"></i> EasyPaisa: 0321-6770416</span></li>
+          <li><a href="https://github.com/SundeepKumar07" target="_blank"><i class="fa-brands fa-github"></i>
+              github.com/SundeepKumar07</a></li>
+          <li><a href="https://linkedin.com/in/sundeep-kumar07" target="_blank"><i class="fa-brands fa-linkedin"></i>
+              linkedin.com/in/sundeep-kumar07</a></li>
+        </ul>
+      </div>
+    </div>
+
+    <div class="footer-bottom container">
+      <p>&copy; 2026 DukanFlow (ShopManagerApp). All rights reserved. Designed & Built with precision by Sundeep Kumar.
+      </p>
+      <div class="back-to-top" id="backToTop">
+        <i class="fa-solid fa-arrow-up"></i>
+      </div>
+    </div>
+  </footer>
+
+  <!-- Floating WhatsApp Action Button -->
+  <a href="https://wa.me/923216770416?text=Hi%20Sundeep,%20I%20have%20a%20question%20about%20DukanFlow!" target="_blank"
+    rel="noopener noreferrer" class="floating-whatsapp" aria-label="Chat on WhatsApp">
+    <i class="fa-brands fa-whatsapp"></i>
+    <span class="wa-tooltip">Chat with Developer</span>
+  </a>
+
+  <!-- Download Toast Notification -->
+  <div class="download-toast" id="downloadToast">
+    <div class="toast-icon"><i class="fa-solid fa-circle-check"></i></div>
+    <div class="toast-body">
+      <strong>Downloading DukanFlow v3.0.1 APK</strong>
+      <p>Check your notifications to complete installation on Android.</p>
+    </div>
+  </div>
+
+  <script src="script.js"></script>
+</body>
+
+</html>
