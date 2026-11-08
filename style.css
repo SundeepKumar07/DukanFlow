@@ -145,6 +145,48 @@ code {
   background: linear-gradient(135deg, var(--accent-emerald-light), var(--accent-emerald));
 }
 
+/* HIGH-CONTRAST DEDICATED BRAND BUTTONS */
+.btn-github {
+  background: linear-gradient(135deg, #24292f, #0f1419);
+  color: #ffffff;
+  border: 1px solid rgba(255, 255, 255, 0.2);
+  box-shadow: 0 4px 18px rgba(0, 0, 0, 0.4);
+}
+
+.btn-github:hover {
+  background: linear-gradient(135deg, #333a42, #1b2128);
+  border-color: rgba(255, 255, 255, 0.4);
+  transform: translateY(-2px);
+  box-shadow: 0 6px 22px rgba(255, 255, 255, 0.15);
+}
+
+.btn-drive {
+  background: linear-gradient(135deg, #1e3a8a, #0369a1);
+  color: #ffffff;
+  border: 1px solid rgba(59, 130, 246, 0.4);
+  box-shadow: 0 4px 18px rgba(59, 130, 246, 0.3);
+}
+
+.btn-drive:hover {
+  background: linear-gradient(135deg, #2563eb, #0284c7);
+  border-color: rgba(96, 165, 250, 0.7);
+  transform: translateY(-2px);
+  box-shadow: 0 6px 22px rgba(59, 130, 246, 0.5);
+}
+
+.btn-whatsapp-cta {
+  background: rgba(37, 211, 102, 0.12);
+  border: 1px solid rgba(37, 211, 102, 0.4);
+  color: #25d366;
+}
+
+.btn-whatsapp-cta:hover {
+  background: #25d366;
+  color: #ffffff;
+  transform: translateY(-2px);
+  box-shadow: 0 6px 20px rgba(37, 211, 102, 0.35);
+}
+
 .btn-outline {
   background: rgba(255, 255, 255, 0.04);
   border: 1px solid var(--border-color);
@@ -1235,6 +1277,28 @@ code {
   flex-grow: 1;
 }
 
+.tier-buttons-stack {
+  display: flex;
+  flex-direction: column;
+  gap: 10px;
+}
+
+.tier-mirror-link {
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  gap: 6px;
+  font-size: 0.8rem;
+  color: var(--text-dim);
+  margin-top: 10px;
+  text-decoration: underline;
+  transition: color 0.2s ease;
+}
+
+.tier-mirror-link:hover {
+  color: var(--accent-emerald-light);
+}
+
 .tier-features li {
   display: flex;
   align-items: flex-start;
@@ -1903,45 +1967,79 @@ code {
     height: 64px;
   }
 
+  .brand-logo {
+    gap: 10px;
+  }
+
+  .logo-icon {
+    width: 36px;
+    height: 36px;
+    font-size: 1.1rem;
+    border-radius: 10px;
+  }
+
+  .logo-title {
+    font-size: 1.15rem;
+  }
+
   .hero-section {
-    padding-top: 25px;
-    padding-bottom: 40px;
-    gap: 35px;
+    padding-top: 20px;
+    padding-bottom: 35px;
+    gap: 25px;
   }
 
   .hero-badge {
-    margin-bottom: 18px;
+    margin-bottom: 14px;
     max-width: 100%;
-    font-size: 0.75rem;
+    font-size: 0.72rem;
+    padding: 5px 12px;
   }
 
   .hero-title {
-    font-size: 2rem;
-    line-height: 1.2;
+    font-size: 1.85rem;
+    line-height: 1.22;
     letter-spacing: -0.5px;
   }
 
   .hero-subtitle {
-    font-size: 0.95rem;
-    line-height: 1.55;
-    margin-bottom: 24px;
+    font-size: 0.92rem;
+    line-height: 1.5;
+    margin-bottom: 22px;
   }
 
   .hero-ctas {
     flex-direction: column;
     width: 100%;
-    gap: 12px;
+    gap: 10px;
+    margin-bottom: 25px;
   }
 
   .hero-ctas .btn {
     width: 100%;
+    padding: 14px 18px;
+    justify-content: flex-start;
+  }
+
+  .hero-ctas .btn .btn-icon {
+    font-size: 1.5rem;
+    min-width: 30px;
+    display: flex;
+    justify-content: center;
+  }
+
+  .hero-ctas .btn .btn-text-group {
+    flex-grow: 1;
+  }
+
+  .hero-ctas .btn-whatsapp-cta {
+    justify-content: center;
   }
 
   .hero-stats {
     display: grid;
     grid-template-columns: repeat(2, 1fr);
-    gap: 14px;
-    padding-top: 20px;
+    gap: 10px;
+    padding-top: 18px;
   }
 
   .stat-divider {
@@ -1950,32 +2048,45 @@ code {
 
   .stat-item {
     align-items: center;
-    background: rgba(255, 255, 255, 0.02);
+    background: rgba(255, 255, 255, 0.03);
     border: 1px solid var(--border-color);
     padding: 10px 8px;
     border-radius: var(--radius-sm);
   }
 
   .stat-number {
-    font-size: 1.25rem;
+    font-size: 1.2rem;
   }
 
   .phone-frame {
     width: 100%;
-    max-width: 310px;
+    max-width: 320px;
     height: auto;
-    min-height: 520px;
-    border-width: 5px;
-    border-radius: 32px;
+    min-height: auto;
+    border-width: 4px;
+    border-radius: 28px;
+    padding: 10px;
+    box-shadow: 0 15px 35px rgba(0, 0, 0, 0.6);
+  }
+
+  .phone-screen {
+    padding: 16px 12px 14px;
+    border-radius: 20px;
+    gap: 10px;
+  }
+
+  .app-card {
     padding: 10px;
   }
 
   .floating-pill {
     position: static;
-    margin-top: 10px;
+    margin-top: 8px;
     animation: none;
     width: 100%;
     justify-content: center;
+    padding: 8px 12px;
+    font-size: 0.72rem;
   }
 
   .pill-printer,
@@ -1986,15 +2097,22 @@ code {
   }
 
   .section-header {
-    margin-bottom: 35px;
+    margin-bottom: 28px;
+  }
+
+  .section-tag {
+    font-size: 0.7rem;
+    letter-spacing: 1px;
   }
 
   .section-title {
-    font-size: 1.6rem;
+    font-size: 1.5rem;
+    line-height: 1.25;
   }
 
   .section-desc {
-    font-size: 0.92rem;
+    font-size: 0.88rem;
+    line-height: 1.5;
   }
 
   .features-section,
@@ -2002,7 +2120,7 @@ code {
   .faq-section,
   .roadmap-section,
   .developer-section {
-    padding: 55px 16px;
+    padding: 45px 16px;
   }
 
   .nav-links {
@@ -2018,8 +2136,8 @@ code {
     border-bottom: 1px solid var(--border-color);
     flex-direction: column;
     align-items: stretch;
-    padding: 24px 20px 40px;
-    gap: 16px;
+    padding: 20px 20px 40px;
+    gap: 14px;
     transform: translateY(-120%);
     transition: transform 0.3s ease;
   }
@@ -2029,9 +2147,9 @@ code {
   }
 
   .nav-link {
-    font-size: 1.1rem;
-    padding: 10px 0;
-    border-bottom: 1px solid rgba(255, 255, 255, 0.05);
+    font-size: 1.05rem;
+    padding: 12px 0;
+    border-bottom: 1px solid rgba(255, 255, 255, 0.06);
   }
 
   .nav-cta.btn-apk-nav {
@@ -2039,7 +2157,7 @@ code {
     width: 100%;
     margin-top: 14px;
     padding: 14px;
-    font-size: 1rem;
+    font-size: 0.95rem;
   }
 
   .mobile-hide {
@@ -2052,11 +2170,33 @@ code {
 
   .features-grid {
     grid-template-columns: 1fr;
-    gap: 18px;
+    gap: 16px;
   }
 
   .feature-card {
-    padding: 22px;
+    padding: 20px 18px;
+    border-radius: var(--radius-md);
+  }
+
+  .feature-icon-box {
+    width: 46px;
+    height: 46px;
+    font-size: 1.2rem;
+    margin-bottom: 14px;
+  }
+
+  .feature-title {
+    font-size: 1.15rem;
+    margin-bottom: 8px;
+  }
+
+  .feature-text {
+    font-size: 0.88rem;
+    margin-bottom: 14px;
+  }
+
+  .trust-strip {
+    padding: 22px 0;
   }
 
   .trust-grid {
@@ -2066,39 +2206,69 @@ code {
 
   .stats-banner-card {
     padding: 24px 16px;
+    border-radius: var(--radius-md);
   }
 
   .stats-headline {
-    font-size: 1.35rem;
+    font-size: 1.3rem;
+  }
+
+  .stats-subline {
+    font-size: 0.88rem;
+    margin-bottom: 20px;
   }
 
   .stats-highlight-grid {
     grid-template-columns: 1fr;
-    gap: 12px;
+    gap: 10px;
   }
 
   .stat-box-large {
-    padding: 16px;
+    padding: 14px;
+  }
+
+  .arch-section {
+    padding: 45px 0;
   }
 
   .arch-cards-wrapper {
     grid-template-columns: 1fr;
-    gap: 14px;
+    gap: 12px;
+    margin-bottom: 30px;
+  }
+
+  .arch-card {
+    padding: 18px;
   }
 
   .comparison-box {
     grid-template-columns: 1fr;
-    padding: 22px 16px;
-    gap: 20px;
+    padding: 20px 16px;
+    gap: 18px;
     text-align: left;
   }
 
   .comp-col ul li {
     justify-content: flex-start;
+    font-size: 0.88rem;
   }
 
   .comp-divider {
     display: none;
+  }
+
+  .dev-card {
+    border-radius: var(--radius-md);
+  }
+
+  .dev-avatar-col {
+    padding: 28px 18px;
+  }
+
+  .dev-avatar-placeholder {
+    width: 90px;
+    height: 90px;
+    font-size: 2.2rem;
   }
 
   .dev-info-col {
@@ -2109,70 +2279,121 @@ code {
     font-size: 1.6rem;
   }
 
+  .dev-bio {
+    font-size: 0.92rem;
+  }
+
+  .dev-statement {
+    font-size: 0.88rem;
+    padding: 10px 14px;
+  }
+
   .dev-highlights {
     grid-template-columns: 1fr;
+    gap: 10px;
   }
 
   .roadmap-grid {
     grid-template-columns: 1fr;
-    gap: 14px;
+    gap: 12px;
+  }
+
+  .roadmap-item {
+    padding: 18px;
   }
 
   .pricing-grid {
     max-width: 100%;
+    gap: 18px;
   }
 
   .pricing-card {
-    padding: 28px 20px;
+    padding: 26px 18px;
+    border-radius: var(--radius-md);
+  }
+
+  .price-val {
+    font-size: 1.8rem;
+  }
+
+  .faq-question {
+    padding: 16px 18px;
+    font-size: 0.92rem;
+  }
+
+  .faq-answer {
+    padding: 0 18px;
+  }
+
+  .faq-answer p {
+    font-size: 0.86rem;
+  }
+
+  .download-banner {
+    padding: 20px 16px 60px;
   }
 
   .banner-inner {
-    padding: 36px 18px;
+    padding: 30px 16px;
+    border-radius: var(--radius-md);
   }
 
   .banner-content h2 {
-    font-size: 1.6rem;
+    font-size: 1.5rem;
+  }
+
+  .banner-content p {
+    font-size: 0.92rem;
+    margin-bottom: 22px;
   }
 
   .banner-actions {
     flex-direction: column;
-    gap: 12px;
+    gap: 10px;
   }
 
   .banner-actions .btn {
     width: 100%;
+    padding: 14px 16px;
   }
 
   .file-path-hint {
     flex-direction: column;
-    gap: 4px;
-    word-break: break-all;
+    gap: 6px;
+    font-size: 0.78rem;
   }
 
   .payment-channels-bar {
     flex-direction: column;
-    gap: 14px;
+    gap: 12px;
     text-align: center;
-    padding: 16px;
+    padding: 16px 14px;
+    font-size: 0.85rem;
+  }
+
+  .footer {
+    padding-top: 45px;
+    padding-bottom: 25px;
   }
 
   .footer-content {
     grid-template-columns: 1fr;
-    gap: 30px;
+    gap: 25px;
+    margin-bottom: 35px;
   }
 
   .footer-bottom {
     flex-direction: column-reverse;
-    gap: 16px;
+    gap: 14px;
     text-align: center;
   }
 
   .floating-whatsapp {
     bottom: 16px;
     right: 16px;
-    width: 50px;
-    height: 50px;
-    font-size: 1.5rem;
+    width: 48px;
+    height: 48px;
+    font-size: 1.45rem;
   }
 }
 
