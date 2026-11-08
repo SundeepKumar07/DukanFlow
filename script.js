@@ -58,7 +58,7 @@ document.addEventListener('DOMContentLoaded', () => {
   ];
 
   // Base download count starting from 10 + persistent increments + optional GitHub Releases API sync
-  const BASE_DOWNLOADS = 10;
+  const BASE_DOWNLOADS = 30; // start count from 49 as per updated requirement
   const STORAGE_KEY = 'dukanflow_downloads_count_v2';
 
   function getStoredCount() {
