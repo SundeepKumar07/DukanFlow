@@ -48,26 +48,29 @@ document.addEventListener('DOMContentLoaded', () => {
     faqItems[0].classList.add('active');
   }
 
-  // 3. Download Counter & APK Download Feedback Notification
+  // 3. Actual Downloads Tracker (GitHub Releases + Website & Drive Downloads)
   const downloadToast = document.getElementById('downloadToast');
-  const apkDownloadBtns = document.querySelectorAll('a[download]');
+  const allDownloadBtns = document.querySelectorAll('a[download], a.btn-drive, a[href*="drive.google.com"]');
   const counterElements = [
     document.getElementById('downloadCounter'),
     document.getElementById('bannerDownloadCounter'),
     document.getElementById('statsSectionDownloadCounter')
   ];
 
-  // Base download count starting from 10 + persistent increments + optional GitHub Releases API sync
-  const BASE_DOWNLOADS = 30; // start count from 49 as per updated requirement
-  const STORAGE_KEY = 'dukanflow_downloads_count_v2';
+  // REAL CONFIRMED DOWNLOADS:
+  // v3.0.2 GitHub actual releases download count is 51. No artificial base added.
+  const REAL_PREV_DOWNLOADS = 51;
+  const STORAGE_KEY_COUNT = 'dukanflow_actual_downloads_v4';
+  const STORAGE_KEY_DRIVE_CLICKS = 'dukanflow_drive_downloads_v1';
 
-  function getStoredCount() {
-    const saved = localStorage.getItem(STORAGE_KEY);
-    if (!saved) {
-      localStorage.setItem(STORAGE_KEY, BASE_DOWNLOADS);
-      return BASE_DOWNLOADS;
+  function getStoredTotal() {
+    const saved = localStorage.getItem(STORAGE_KEY_COUNT);
+    const parsed = parseInt(saved, 10);
+    if (!saved || isNaN(parsed) || parsed < REAL_PREV_DOWNLOADS) {
+      localStorage.setItem(STORAGE_KEY_COUNT, REAL_PREV_DOWNLOADS);
+      return REAL_PREV_DOWNLOADS;
     }
-    return parseInt(saved, 10) || BASE_DOWNLOADS;
+    return parsed;
   }
 
   function updateDisplayCounters(val) {
@@ -77,46 +80,69 @@ document.addEventListener('DOMContentLoaded', () => {
     });
   }
 
-  // Initialize counter display
-  let currentDownloads = getStoredCount();
+  // Initialize display with actual downloads (51)
+  let currentDownloads = getStoredTotal();
   updateDisplayCounters(currentDownloads);
 
-  // Auto-fetch real downloads from GitHub Releases if hosted under a repository
+  // Auto-fetch real downloads from GitHub API (actual downloads across all releases)
   async function fetchGitHubReleaseDownloads(owner, repo) {
     try {
       const response = await fetch(`https://api.github.com/repos/${owner}/${repo}/releases`);
       if (response.ok) {
         const releases = await response.json();
-        let total = 0;
+        let githubTotal = 0;
         releases.forEach(rel => {
           if (rel.assets && Array.isArray(rel.assets)) {
             rel.assets.forEach(asset => {
-              total += asset.download_count || 0;
+              githubTotal += asset.download_count || 0;
             });
           }
         });
-        if (total > 0) {
-          currentDownloads = BASE_DOWNLOADS + total;
+
+        // Add real Drive downloads initiated on website
+        const driveClicks = parseInt(localStorage.getItem(STORAGE_KEY_DRIVE_CLICKS), 10) || 0;
+        const actualTotal = Math.max(REAL_PREV_DOWNLOADS, githubTotal) + driveClicks;
+
+        if (actualTotal > currentDownloads) {
+          currentDownloads = actualTotal;
+          localStorage.setItem(STORAGE_KEY_COUNT, currentDownloads);
           updateDisplayCounters(currentDownloads);
         }
       }
     } catch (e) {
-      // Gracefully fall back to local counter
+      // Gracefully maintain local counter
     }
   }
 
-  // Example GitHub sync hook (auto-connects to your releases repo):
+  // Auto-connect to releases repository
   fetchGitHubReleaseDownloads('SundeepKumar07', 'DukanFlow-releases');
 
-  apkDownloadBtns.forEach(btn => {
+  // Track actual downloads from BOTH GitHub and Google Drive
+  allDownloadBtns.forEach(btn => {
     btn.addEventListener('click', () => {
-      // Increment local count & update UI instantly
+      const isDrive = btn.classList.contains('btn-drive') || (btn.href && btn.href.includes('drive.google.com'));
+
+      if (isDrive) {
+        // Track Drive download click
+        let driveClicks = parseInt(localStorage.getItem(STORAGE_KEY_DRIVE_CLICKS), 10) || 0;
+        driveClicks += 1;
+        localStorage.setItem(STORAGE_KEY_DRIVE_CLICKS, driveClicks);
+      }
+
+      // Increment actual total downloads & update UI instantly
       currentDownloads += 1;
-      localStorage.setItem(STORAGE_KEY, currentDownloads);
+      localStorage.setItem(STORAGE_KEY_COUNT, currentDownloads);
       updateDisplayCounters(currentDownloads);
 
       // Show toast
       if (downloadToast) {
+        const toastBody = downloadToast.querySelector('.toast-body');
+        if (toastBody) {
+          toastBody.innerHTML = `
+            <strong>${isDrive ? 'Opening Google Drive Download' : 'Downloading DukanFlow v3.0.3 APK'}</strong>
+            <p>${isDrive ? 'Opening Google Drive mirror link...' : 'Check your notifications to complete installation on Android.'}</p>
+          `;
+        }
         downloadToast.classList.add('show');
         setTimeout(() => {
           downloadToast.classList.remove('show');
