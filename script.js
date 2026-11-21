@@ -48,7 +48,7 @@ document.addEventListener('DOMContentLoaded', () => {
     faqItems[0].classList.add('active');
   }
 
-  // 3. Actual Downloads Tracker (GitHub Releases + Website & Drive Downloads)
+  // 3. GitHub Releases Live Downloads Counter & Download Feedback Notification
   const downloadToast = document.getElementById('downloadToast');
   const allDownloadBtns = document.querySelectorAll('a[download], a.btn-drive, a[href*="drive.google.com"]');
   const counterElements = [
@@ -57,23 +57,10 @@ document.addEventListener('DOMContentLoaded', () => {
     document.getElementById('statsSectionDownloadCounter')
   ];
 
-  // REAL CONFIRMED DOWNLOADS:
-  // Starts at 54 (v3.0.2 verified 51 + verified initial downloads).
-  // Dynamically increments as people download from GitHub releases & Google Drive.
-  const REAL_PREV_DOWNLOADS = 54;
-  const GITHUB_OLD_RELEASE_COUNT = 51; // v3.0.2 initial count on GitHub
-  const STORAGE_KEY_COUNT = 'dukanflow_actual_downloads_v5';
-  const STORAGE_KEY_DRIVE_CLICKS = 'dukanflow_drive_downloads_v2';
-
-  function getStoredTotal() {
-    const saved = localStorage.getItem(STORAGE_KEY_COUNT);
-    const parsed = parseInt(saved, 10);
-    if (!saved || isNaN(parsed) || parsed < REAL_PREV_DOWNLOADS) {
-      localStorage.setItem(STORAGE_KEY_COUNT, REAL_PREV_DOWNLOADS);
-      return REAL_PREV_DOWNLOADS;
-    }
-    return parsed;
-  }
+  // Clean up any legacy localStorage counters so every device/profile displays the exact same GitHub count
+  ['dukanflow_downloads_count_v2', 'dukanflow_downloads_count_v3', 'dukanflow_actual_downloads_v4', 'dukanflow_actual_downloads_v5', 'dukanflow_drive_downloads_v1', 'dukanflow_drive_downloads_v2'].forEach(k => {
+    try { localStorage.removeItem(k); } catch (e) {}
+  });
 
   function updateDisplayCounters(val) {
     const formatted = Number(val).toLocaleString();
@@ -82,11 +69,7 @@ document.addEventListener('DOMContentLoaded', () => {
     });
   }
 
-  // Initialize display with actual downloads (54)
-  let currentDownloads = getStoredTotal();
-  updateDisplayCounters(currentDownloads);
-
-  // Auto-fetch real downloads from GitHub API across ALL releases (v3.0.2 + v3.0.3)
+  // Direct read from GitHub Releases API across ALL releases (v3.0.2 + v3.0.3 + future releases)
   async function fetchGitHubReleaseDownloads(owner, repo) {
     try {
       const response = await fetch(`https://api.github.com/repos/${owner}/${repo}/releases`);
@@ -100,42 +83,20 @@ document.addEventListener('DOMContentLoaded', () => {
             });
           }
         });
-
-        // Any downloads beyond v3.0.2's initial 51 are newly recorded downloads
-        const newGitHubDownloads = Math.max(0, totalReleaseDownloads - GITHUB_OLD_RELEASE_COUNT);
-        const driveClicks = parseInt(localStorage.getItem(STORAGE_KEY_DRIVE_CLICKS), 10) || 0;
-        const actualTotal = REAL_PREV_DOWNLOADS + newGitHubDownloads + driveClicks;
-
-        if (actualTotal > currentDownloads) {
-          currentDownloads = actualTotal;
-          localStorage.setItem(STORAGE_KEY_COUNT, currentDownloads);
-          updateDisplayCounters(currentDownloads);
-        }
+        updateDisplayCounters(totalReleaseDownloads);
       }
     } catch (e) {
-      // Gracefully maintain local counter
+      // Gracefully maintain existing display count if offline/rate-limited
     }
   }
 
-  // Auto-connect to releases repository
+  // Auto-fetch live stats directly from GitHub releases
   fetchGitHubReleaseDownloads('SundeepKumar07', 'DukanFlow-releases');
 
-  // Track actual downloads from BOTH GitHub and Google Drive
+  // Handle download button clicks (feedback toast notification only — no local storage desync)
   allDownloadBtns.forEach(btn => {
     btn.addEventListener('click', () => {
       const isDrive = btn.classList.contains('btn-drive') || (btn.href && btn.href.includes('drive.google.com'));
-
-      if (isDrive) {
-        // Track Drive download click
-        let driveClicks = parseInt(localStorage.getItem(STORAGE_KEY_DRIVE_CLICKS), 10) || 0;
-        driveClicks += 1;
-        localStorage.setItem(STORAGE_KEY_DRIVE_CLICKS, driveClicks);
-      }
-
-      // Increment actual total downloads & update UI instantly
-      currentDownloads += 1;
-      localStorage.setItem(STORAGE_KEY_COUNT, currentDownloads);
-      updateDisplayCounters(currentDownloads);
 
       // Show toast
       if (downloadToast) {
