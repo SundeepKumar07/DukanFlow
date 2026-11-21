@@ -62,6 +62,8 @@ document.addEventListener('DOMContentLoaded', () => {
     try { localStorage.removeItem(k); } catch (e) {}
   });
 
+  let liveDownloadCount = 56;
+
   function updateDisplayCounters(val) {
     const formatted = Number(val).toLocaleString();
     counterElements.forEach(el => {
@@ -69,10 +71,11 @@ document.addEventListener('DOMContentLoaded', () => {
     });
   }
 
-  // Direct read from GitHub Releases API across ALL releases (v3.0.2 + v3.0.3 + future releases)
+  // Direct live read from GitHub Releases API across ALL releases (v3.0.2 + v3.0.3)
+  // Uses cache-busting timestamp to always get the freshest data
   async function fetchGitHubReleaseDownloads(owner, repo) {
     try {
-      const response = await fetch(`https://api.github.com/repos/${owner}/${repo}/releases`);
+      const response = await fetch(`https://api.github.com/repos/${owner}/${repo}/releases?_t=${Date.now()}`);
       if (response.ok) {
         const releases = await response.json();
         let totalReleaseDownloads = 0;
@@ -83,7 +86,8 @@ document.addEventListener('DOMContentLoaded', () => {
             });
           }
         });
-        updateDisplayCounters(totalReleaseDownloads);
+        liveDownloadCount = totalReleaseDownloads;
+        updateDisplayCounters(liveDownloadCount);
       }
     } catch (e) {
       // Gracefully maintain existing display count if offline/rate-limited
@@ -93,10 +97,14 @@ document.addEventListener('DOMContentLoaded', () => {
   // Auto-fetch live stats directly from GitHub releases
   fetchGitHubReleaseDownloads('SundeepKumar07', 'DukanFlow-releases');
 
-  // Handle download button clicks (feedback toast notification only — no local storage desync)
+  // Handle download button clicks
   allDownloadBtns.forEach(btn => {
     btn.addEventListener('click', () => {
       const isDrive = btn.classList.contains('btn-drive') || (btn.href && btn.href.includes('drive.google.com'));
+
+      // Instant optimistic UI increment for current session without modifying localStorage
+      liveDownloadCount += 1;
+      updateDisplayCounters(liveDownloadCount);
 
       // Show toast
       if (downloadToast) {
