@@ -58,10 +58,12 @@ document.addEventListener('DOMContentLoaded', () => {
   ];
 
   // REAL CONFIRMED DOWNLOADS:
-  // v3.0.2 GitHub actual releases download count is 51. No artificial base added.
-  const REAL_PREV_DOWNLOADS = 51;
-  const STORAGE_KEY_COUNT = 'dukanflow_actual_downloads_v4';
-  const STORAGE_KEY_DRIVE_CLICKS = 'dukanflow_drive_downloads_v1';
+  // Starts at 54 (v3.0.2 verified 51 + verified initial downloads).
+  // Dynamically increments as people download from GitHub releases & Google Drive.
+  const REAL_PREV_DOWNLOADS = 54;
+  const GITHUB_OLD_RELEASE_COUNT = 51; // v3.0.2 initial count on GitHub
+  const STORAGE_KEY_COUNT = 'dukanflow_actual_downloads_v5';
+  const STORAGE_KEY_DRIVE_CLICKS = 'dukanflow_drive_downloads_v2';
 
   function getStoredTotal() {
     const saved = localStorage.getItem(STORAGE_KEY_COUNT);
@@ -80,28 +82,29 @@ document.addEventListener('DOMContentLoaded', () => {
     });
   }
 
-  // Initialize display with actual downloads (51)
+  // Initialize display with actual downloads (54)
   let currentDownloads = getStoredTotal();
   updateDisplayCounters(currentDownloads);
 
-  // Auto-fetch real downloads from GitHub API (actual downloads across all releases)
+  // Auto-fetch real downloads from GitHub API across ALL releases (v3.0.2 + v3.0.3)
   async function fetchGitHubReleaseDownloads(owner, repo) {
     try {
       const response = await fetch(`https://api.github.com/repos/${owner}/${repo}/releases`);
       if (response.ok) {
         const releases = await response.json();
-        let githubTotal = 0;
+        let totalReleaseDownloads = 0;
         releases.forEach(rel => {
           if (rel.assets && Array.isArray(rel.assets)) {
             rel.assets.forEach(asset => {
-              githubTotal += asset.download_count || 0;
+              totalReleaseDownloads += asset.download_count || 0;
             });
           }
         });
 
-        // Add real Drive downloads initiated on website
+        // Any downloads beyond v3.0.2's initial 51 are newly recorded downloads
+        const newGitHubDownloads = Math.max(0, totalReleaseDownloads - GITHUB_OLD_RELEASE_COUNT);
         const driveClicks = parseInt(localStorage.getItem(STORAGE_KEY_DRIVE_CLICKS), 10) || 0;
-        const actualTotal = Math.max(REAL_PREV_DOWNLOADS, githubTotal) + driveClicks;
+        const actualTotal = REAL_PREV_DOWNLOADS + newGitHubDownloads + driveClicks;
 
         if (actualTotal > currentDownloads) {
           currentDownloads = actualTotal;
